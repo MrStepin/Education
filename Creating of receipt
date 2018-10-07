@@ -1,0 +1,48 @@
+PRODUCTS = [
+   [ 'яблоки', 100 ],
+   [ 'швейцарский сыр', 1500 ],
+   [ 'красная рыба', 450 ]
+]
+
+
+
+def creating_of_receipt(body_of_receipt,
+                        upper_border = ' ', 
+                        line_border = '_', 
+                        length_of_line_border = 30, 
+                        border = '|', 
+                        qty_of_symbols_in_product_name = 15, 
+                        qty_of_symbols_in_price = 5):
+    
+    var_for_line_border = line_border*length_of_line_border      #creating of border
+    upper_part_of_receipt = '{0}{1}{0}'.format(upper_border,var_for_line_border) 
+    down_part_of_receipt = '{0}{1}{0}'.format(border,var_for_line_border)
+    
+    list_of_str = [upper_part_of_receipt]       # creating of list 
+    for product_name,price in PRODUCTS:
+        product_name_for_printing = product_name
+        price_of_products = str(price) 
+        short_product_name = product_name_for_printing[:qty_of_symbols_in_product_name]
+        short_price_of_product = price_of_products[:qty_of_symbols_in_price]
+        
+        list_of_str.append(('{0}{1: <20}{2: <5} руб.{0: <1}').format(border, 
+                                                                     short_product_name, 
+                                                                     short_price_of_product))
+    
+    list_of_str.append(down_part_of_receipt) #add down border
+
+    return '\n'.join(list_of_str)  #return list with one element on one string
+
+    
+    
+def printing_of_receipt(printing):
+    
+    print(printing)
+    
+
+
+if __name__ == '__main__':
+    
+    creating_of_receipt(PRODUCTS)  
+    printing = creating_of_receipt(PRODUCTS)
+    printing_of_receipt(printing)
