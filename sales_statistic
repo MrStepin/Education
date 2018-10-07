@@ -1,0 +1,33 @@
+import json
+import collections 
+from collections import Counter
+
+def file_reading():
+
+    with open('./sales_log.json') as file_with_sales:  #open file
+        data_from_file = json.loads(file_with_sales.read())   #transfer to list
+    return data_from_file     
+        
+
+def sorting_of_products(data_from_file, hyphen = ' - '):
+    
+    list_of_sales = []    
+    sales_stats = Counter(data_from_file)     #count of elements in file
+    for key, value in sales_stats.most_common(): 
+        list_of_sales.append('{0}{2}{1}'.format(key, value, hyphen))
+        
+    return '\n'.join(list_of_sales)  # transfer to list and return 1 element on one string
+
+
+def printing_of_results(printing):
+
+    print(printing)
+
+
+if __name__ == '__main__': 
+
+    file_reading()
+    data = file_reading()
+    sorting_of_products(data)
+    printing = sorting_of_products(data) 
+    printing_of_results(printing)
